@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bariatric follow up</title>
+  <style>
+    body {
+      margin: 0;
+      font-size: 32px;
+      font-family: 'Helvetica', sans-serif;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: #007acc;
+      color: white;
+    }
+
+    header {
+      width: 100%;
+      padding: 10px 20px;
+      background-color: #e0f2ff;
+      font-size: 20px;
+      font-weight: normal;
+      text-align: left;
+      border-bottom: 1px solid #ccc;
+      color: #003366;
+    }
+
+    .content {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      padding: 0 10vw;
+    }
+
+    .text-block {
+      max-width: 900px;
+      width: 100%;
+      text-align: center;
+      line-height: 2;
+      padding: 0 15px;
+    }
+
+    .text-block p {
+      margin-bottom: 24px;
+    }
+
+    .custom-dropdown {
+      position: relative;
+      display: inline-block;
+      font-family: 'Helvetica', sans-serif;
+      font-style: italic;
+      font-size: 1em;
+      color: white;
+      border-bottom: 2px solid white;
+      margin: 0 8px;
+    }
+
+    .custom-dropdown .selected {
+      background: transparent;
+      cursor: pointer;
+      padding: 6px 10px;
+    }
+
+    .custom-dropdown .selected::after {
+      content: " ▾";
+      font-size: 0.8em;
+      margin-left: 0.3em;
+    }
+
+    .custom-dropdown .dropdown-options {
+      position: absolute;
+      left: 0;
+      top: 100%;
+      background: white;
+      color: black;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: none;
+      min-width: 100%;
+      z-index: 10;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .custom-dropdown .dropdown-options li {
+      padding: 8px 12px;
+      cursor: pointer;
+      font-style: italic;
+    }
+
+    .custom-dropdown .dropdown-options li:hover {
+      background-color: #f0f0f0;
+    }
+
+    .inline-dropdown {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .inline-text {
+      display: inline;
+      vertical-align: middle;
+    }
+
+    footer {
+      width: 100%;
+      background-color: #e0f2ff;
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 14px;
+      color: #003366;
+      border-top: 1px solid #ccc;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+      background-color: white;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 12px;
+      width: 80%;
+      max-width: 600px;
+      color: #003366;
+      text-align: center;
+      position: relative;
+      font-size: 18px;
+      animation: fadeIn 0.3s;
+    }
+
+    .close {
+      color: #007acc;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #005f99;
+      text-decoration: none;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</head>
+<body onload="showInfo()">
+  <header>Bariatric follow up for GPs</header>
+
+  <div class="content">
+    <div class="text-block">
+      <p>
+        My patient had a
+        <div class="custom-dropdown inline-dropdown">
+          <div class="selected" onclick="toggleDropdown(this)">gastric sleeve</div>
+          <ul class="dropdown-options">
+            <li onclick="selectOption(this)">gastric sleeve</li>
+            <li onclick="selectOption(this)">roux-en-Y bypass</li>
+          </ul>
+        </div>
+        <div class="custom-dropdown inline-dropdown">
+          <div class="selected" onclick="toggleDropdown(this)">less than 3 weeks</div>
+          <ul class="dropdown-options">
+            <li onclick="selectOption(this)">less than 3 weeks</li>
+            <li onclick="selectOption(this)">3-8 weeks</li>
+            <li onclick="selectOption(this)">over 8 weeks</li>
+          </ul>
+        </div>
+        ago overseas.
+      </p>
+
+      <p>
+        They
+        <div class="custom-dropdown inline-dropdown">
+          <div class="selected" onclick="toggleDropdown(this)">do</div>
+          <ul class="dropdown-options">
+            <li onclick="selectOption(this)">do</li>
+            <li onclick="selectOption(this)">do not</li>
+          </ul>
+        </div>
+        <span class="inline-text">have diabetes.</span>
+      </p>
+
+      <p>
+        I want to know about:
+        <div class="custom-dropdown inline-dropdown">
+          <div class="selected" id="info-selected" onclick="toggleDropdown(this)">routine follow up</div>
+          <ul class="dropdown-options">
+            <li onclick="selectInfoOption(this, 'routine')">routine follow up</li>
+            <li onclick="selectInfoOption(this, 'complications')">possible complications</li>
+            <li onclick="selectInfoOption(this, 'medications')">medication adjustments</li>
+            <li onclick="selectInfoOption(this, 'nutrition')">nutritional advice</li>
+          </ul>
+        </div>.
+      </p>
+    </div>
+  </div>
+
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <p id="modal-text"></p>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Bariatric Guidance. Based on the NZ bariatric guidelines.
+  </footer>
+
+  <script>
+    function toggleDropdown(element) {
+      const dropdown = element.parentElement.querySelector('.dropdown-options');
+      const allDropdowns = document.querySelectorAll('.dropdown-options');
+      allDropdowns.forEach(d => {
+        if (d !== dropdown) d.style.display = 'none';
+      });
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function selectOption(option) {
+      const selectedDiv = option.closest('.custom-dropdown').querySelector('.selected');
+      selectedDiv.textContent = option.textContent;
+      option.parentElement.style.display = 'none';
+      checkSelections();
+    }
+
+    function selectInfoOption(option, value) {
+      const selectedDiv = document.getElementById('info-selected');
+      selectedDiv.textContent = option.textContent;
+      option.parentElement.style.display = 'none';
+      showInfo(value);
+    }
+
+    function showInfo(value) {
+      let message = "";
+      if (!value) {
+        const current = document.getElementById('info-selected');
+        value = current.textContent.toLowerCase();
+      }
+
+      switch (value) {
+        case "routine":
+          message = `
+            <strong>Routine follow-up should include:</strong><br><br>
+            <ul style="text-align: left; display: inline-block; line-height: 1.6;">
+              <li><strong>Diet:</strong> Pureed diet, slow wean onto solid foods after 6 weeks.</li>
+              <li><strong>Medications:</strong> Check insulin and oral hypoglycaemic agents stopped pre-op.<br>Review anti-hypertensives and medications with a narrow therapeutic index.</li>
+              <li><strong>Multivitamins:</strong> Bariatric-specific multivitamin commenced plus thiamine for the first 3 weeks.</li>
+              <li><strong>Bloods:</strong> Arrange recalls for bloods.</li>
+            </ul>
+          `;
+          break;
+        case "complications":
+          message = `
+            <strong>Watch for complications such as:</strong><br><br>
+            <ul style="text-align: left; display: inline-block; line-height: 1.6;">
+              <li>Wound infections or abscesses.</li>
+              <li>Anastomotic leaks (especially in the first few weeks).</li>
+              <li>Nutritional deficiencies—fatigue, neuropathy, or anemia.</li>
+              <li>Dumping syndrome (especially in bypass patients).</li>
+            </ul>
+          `;
+          break;
+        case "medications":
+          message = `
+            <strong>Medication adjustments:</strong><br><br>
+            <ul style="text-align: left; display: inline-block; line-height: 1.6;">
+              <li>Review antihypertensives—some may no longer be needed.</li>
+              <li>Titrate or cease diabetic medications as needed.</li>
+              <li>Avoid NSAIDs; consider gastroprotection.</li>
+              <li>Ensure continuation of vitamin/mineral supplementation.</li>
+            </ul>
+          `;
+          break;
+        case "nutrition":
+          message = `
+            <strong>Nutritional advice:</strong><br><br>
+            <ul style="text-align: left; display: inline-block; line-height: 1.6;">
+              <li>High-protein, low-sugar meals eaten slowly in small portions.</li>
+              <li>Avoid drinking fluids with meals.</li>
+              <li>Lifelong vitamin and mineral supplementation required.</li>
+              <li>Regular follow-up with a bariatric dietitian is essential.</li>
+            </ul>
+          `;
+          break;
+        default:
+          message = "";
+      }
+
+      document.getElementById("modal-text").innerHTML = message;
+      document.getElementById("myModal").style.display = "block";
+    }
+
+    function closeModal() {
+      document.getElementById("myModal").style.display = "none";
+    }
+
+    function checkSelections() {
+      const selections = document.querySelectorAll('.custom-dropdown .selected');
+      let allSelected = true;
+
+      selections.forEach(function (selection) {
+        if (selection.textContent.trim() === "") {
+          allSelected = false;
+        }
+      });
+
+      if (allSelected) {
+        // Do something if needed when all selections made
+      }
+    }
+
+    window.addEventListener('click', function(e) {
+      if (e.target.classList.contains('modal')) {
+        closeModal();
+      }
+      if (!e.target.classList.contains('selected')) {
+        document.querySelectorAll('.dropdown-options').forEach(d => d.style.display = 'none');
+      }
+    });
+  </script>
+</body>
+</html>
