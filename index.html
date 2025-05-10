@@ -11,50 +11,53 @@
 
   <div class="content">
     <div class="text-block">
-      <p>
-        My patient had a
-        <div class="custom-dropdown inline-dropdown">
-          <div class="selected" onclick="toggleDropdown(this)">gastric sleeve</div>
-          <ul class="dropdown-options">
-            <li onclick="selectOption(this)">gastric sleeve</li>
-            <li onclick="selectOption(this)">roux-en-Y bypass</li>
-          </ul>
-        </div>
-        <div class="custom-dropdown inline-dropdown">
-          <div class="selected" onclick="toggleDropdown(this)">less than 3 weeks</div>
-          <ul class="dropdown-options">
-            <li onclick="selectOption(this)">less than 3 weeks</li>
-            <li onclick="selectOption(this)">3-8 weeks</li>
-            <li onclick="selectOption(this)">over 8 weeks</li>
-          </ul>
-        </div>
-        ago overseas.
-      </p>
+      <span class="inline-text">My patient had a </span>
+      <div class="custom-dropdown inline-dropdown">
+        <div class="selected" onclick="toggleDropdown(this)">gastric sleeve</div>
+        <ul class="dropdown-options">
+          <li onclick="selectOption(this)">gastric sleeve</li>
+          <li onclick="selectOption(this)">roux-en-Y bypass</li>
+        </ul>
+      </div>
+    </div>
 
-      <p>
-        They
-        <div class="custom-dropdown inline-dropdown">
-          <div class="selected" onclick="toggleDropdown(this)">do</div>
-          <ul class="dropdown-options">
-            <li onclick="selectOption(this)">do</li>
-            <li onclick="selectOption(this)">do not</li>
-          </ul>
-        </div>
-        <span class="inline-text">have diabetes.</span>
-      </p>
+    <div class="text-block">
+      <div class="custom-dropdown inline-dropdown">
+        <div class="selected" onclick="toggleDropdown(this)">less than 3 weeks</div>
+        <ul class="dropdown-options">
+          <li onclick="selectOption(this)">less than 3 weeks</li>
+          <li onclick="selectOption(this)">3-8 weeks</li>
+          <li onclick="selectOption(this)">over 8 weeks</li>
+        </ul>
+      </div>
+      <span class="inline-text">ago overseas.</span> 
+    </div>
 
-      <p>
-        I want to know about:
-        <div class="custom-dropdown inline-dropdown">
-          <div class="selected" id="info-selected" onclick="toggleDropdown(this)">routine follow up</div>
-          <ul class="dropdown-options">
-            <li onclick="selectInfoOption(this, 'routine')">routine follow up</li>
-            <li onclick="selectInfoOption(this, 'complications')">possible complications</li>
-            <li onclick="selectInfoOption(this, 'medications')">medication adjustments</li>
-            <li onclick="selectInfoOption(this, 'nutrition')">nutritional advice</li>
-          </ul>
-        </div>.
-      </p>
+
+    <div class="text-block"> 
+      <span class="inline-text">They</span>
+      <div class="custom-dropdown inline-dropdown">
+        <div class="selected" onclick="toggleDropdown(this)">do</div>
+        <ul class="dropdown-options">
+          <li onclick="selectOption(this)">do</li>
+          <li onclick="selectOption(this)">do not</li>
+        </ul>
+      </div>
+      <span class="inline-text">have diabetes.</span>
+    </div> 
+
+    <div class="text-block" id="final-form-line">
+      <span class="inline-text">I want to know about:</span>
+      <div class="custom-dropdown inline-dropdown">
+        <div class="selected" id="info-selected" onclick="toggleDropdown(this)">routine follow up</div>
+        <ul class="dropdown-options">
+          <li onclick="selectInfoOption(this, 'routine')">routine follow up</li>
+          <li onclick="selectInfoOption(this, 'complications')">possible complications</li>
+          <li onclick="selectInfoOption(this, 'medications')">medication adjustments</li>
+          <li onclick="selectInfoOption(this, 'nutrition')">nutritional advice</li>
+        </ul>
+      </div>
+      <span class="inline-text">.</span>
     </div>
   </div>
 
