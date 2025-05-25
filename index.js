@@ -84,12 +84,14 @@ function showInfo(value) {
       message = "";
   }
 
-  document.getElementById("modal-text").innerHTML = message;
-  document.getElementById("myModal").style.display = "block";
+  document.getElementById("results-text").innerHTML = message;
+  const resultsElement = document.getElementById("myResults")
+  resultsElement.style.display = "block";
+  resultsElement.scrollIntoView({ behavior: "smooth" }); 
 }
 
-function closeModal() {
-  document.getElementById("myModal").style.display = "none";
+function closeResults() {
+  window.scrollTo( { behavior: "smooth", top: 0 } );
 }
 
 function checkSelections() {
@@ -108,8 +110,8 @@ function checkSelections() {
 }
 
 window.addEventListener('click', function(e) {
-  if (e.target.classList.contains('modal')) {
-    closeModal();
+  if (e.target.classList.contains('results')) {
+    closeResults();
   }
   if (!e.target.classList.contains('selected')) {
     document.querySelectorAll('.dropdown-options').forEach(d => d.style.display = 'none');
