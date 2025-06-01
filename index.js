@@ -38,12 +38,11 @@ function showInfo(value) {
   switch (value) {
     case "routine":
       message = `
-        <strong>Routine follow-up should include:</strong><br><br>
+        <strong>Routine follow-up consult:</strong><br><br>
         <ul style="text-align: left; display: inline-block; line-height: 1.6;">
-          <li><strong>Diet:</strong> Pureed diet, slow wean onto solid foods after 6 weeks.</li>
-          <li><strong>Medications:</strong> Check insulin and oral hypoglycaemic agents stopped pre-op.<br>Review anti-hypertensives and medications with a narrow therapeutic index.</li>
-          <li><strong>Multivitamins:</strong> Bariatric-specific multivitamin commenced plus thiamine for the first 3 weeks.</li>
-          <li><strong>Bloods:</strong> Arrange recalls for bloods.</li>
+          <li><strong>Assessment:</strong><br>Hydration status, blood pressure, possible complications, tolerance of pureed diet - should slowly progress to solids at 6 weeks<br/></li>
+          <li><strong>Management:</strong><br>Review anti-hypertensives and medications with a narrow therapeutic index. Bariatric-specific multivitamin commenced plus thiamine for the first 3 weeks</li>
+          <li><strong>Request:</strong><br>Set up blood recalls<br/></li>
         </ul>
       `;
       break;
