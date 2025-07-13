@@ -1,3 +1,5 @@
+const wildcardMatcher = "*";
+
 function toggleDropdown(element) {
   const dropdown = element.parentElement.querySelector('.dropdown-options');
   const allDropdowns = document.querySelectorAll('.dropdown-options');
@@ -9,104 +11,69 @@ function toggleDropdown(element) {
   dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
 }
 
-function selectOption(option) {
+function selectOption(option, dataValue, scroll = false) {
   const selectedDiv = option.closest('.custom-dropdown').querySelector('.selected');
 
   selectedDiv.textContent = option.textContent;
+  selectedDiv.setAttribute('data-value', dataValue);
   option.parentElement.style.display = 'none';
 
-  checkSelections();
-}
-
-function selectInfoOption(option, value) {
-  const selectedDiv = document.getElementById('info-selected');
-
-  selectedDiv.textContent = option.textContent;
-  option.parentElement.style.display = 'none';
-
-  showInfo(value)
-}
-
-function showInfo(value) {
-  let message = "";
-  console.log('value: ' + value)
-  console.log(!value)
-  if (!value) {
-    return;
-  }
-
-  switch (value) {
-    case "routine":
-      message = `
-        <strong>Routine follow-up consult:</strong><br><br>
-        <ul style="text-align: left; display: inline-block; line-height: 1.6;">
-          <li><strong>Assessment:</strong><br>Hydration status, blood pressure, possible complications, tolerance of pureed diet - should slowly progress to solids at 6 weeks<br/></li>
-          <li><strong>Management:</strong><br>Review anti-hypertensives and medications with a narrow therapeutic index. Bariatric-specific multivitamin commenced plus thiamine for the first 3 weeks</li>
-          <li><strong>Request:</strong><br>Set up blood recalls<br/></li>
-        </ul>
-      `;
-      break;
-    case "complications":
-      message = `
-        <strong>Watch for complications such as:</strong><br><br>
-        <ul style="text-align: left; display: inline-block; line-height: 1.6;">
-          <li>Wound infections or abscesses.</li>
-          <li>Anastomotic leaks (especially in the first few weeks).</li>
-          <li>Nutritional deficiencies—fatigue, neuropathy, or anemia.</li>
-          <li>Dumping syndrome (especially in bypass patients).</li>
-        </ul>
-      `;
-      break;
-    case "medications":
-      message = `
-        <strong>Medication adjustments:</strong><br><br>
-        <ul style="text-align: left; display: inline-block; line-height: 1.6;">
-          <li>Review antihypertensives—some may no longer be needed.</li>
-          <li>Titrate or cease diabetic medications as needed.</li
-          <li>Avoid NSAIDs; consider gastroprotection.</li>
-          <li>Ensure continuation of vitamin/mineral supplementation.</li>
-        </ul>
-      `;
-      break;
-    case "nutrition":
-      message = `
-        <strong>Nutritional advice:</strong><br><br>
-        <ul style="text-align: left; display: inline-block; line-height: 1.6;">
-          <li>High-protein, low-sugar meals eaten slowly in small portions.</li>
-          <li>Avoid drinking fluids with meals.</li>
-          <li>Lifelong vitamin and mineral supplementation required.</li>
-          <li>Regular follow-up with a bariatric dietitian is essential.</li>
-        </ul>
-      `;
-      break;
-    default:
-      message = "";
-  }
+  // checkSelections();
+  message = buildText();
 
   document.getElementById("results-text").innerHTML = message;
-  const resultsElement = document.getElementById("myResults")
-  resultsElement.style.display = "block";
-  resultsElement.scrollIntoView({ behavior: "smooth" }); 
+
+  if(scroll){
+    const resultsElement = document.getElementById("myResults")
+    resultsElement.style.display = "block";
+    resultsElement.scrollIntoView({ behavior: "smooth" }); 
+  }
+}
+
+function buildText() {
+  const surgeryType = document.querySelector('#surgeryType').getAttribute('data-value');
+  const timeSinceSurgery = document.querySelector('#timeSinceSurgery').getAttribute('data-value');
+  const diabetesHistory = document.querySelector('#diabetesHistory').getAttribute('data-value');
+  const adviceType = document.querySelector('#adviceType').getAttribute('data-value');
+
+  const data = getData();
+
+  // Use filter() to get all matching items
+  const matchedItems = data.filter(item => {
+    const surgeryMatch = item.surgeryType === surgeryType || item.surgeryType === wildcardMatcher;
+    const timeMatch = item.timeSinceSurgery === timeSinceSurgery || item.timeSinceSurgery === wildcardMatcher;
+    const diabetesMatch = item.diabetesHistory === diabetesHistory || item.diabetesHistory === wildcardMatcher;
+    const adviceMatch = item.adviceType === adviceType || item.adviceType === wildcardMatcher;
+    
+    return surgeryMatch && timeMatch && diabetesMatch && adviceMatch;
+  });
+  
+  // Sort by order attribute before mapping
+  const sortedItems = matchedItems.sort((a, b) => (a.order || 0) - (b.order || 0));
+  
+  // Combine all matched content or handle multiple results as needed
+  const fullText = sortedItems.map(item => item.yield).join('\n');
+  return fullText
 }
 
 function closeResults() {
   window.scrollTo( { behavior: "smooth", top: 0 } );
 }
 
-function checkSelections() {
-  const selections = document.querySelectorAll('.custom-dropdown .selected');
-  let allSelected = true;
+// function checkSelections() {
+//   const selections = document.querySelectorAll('.custom-dropdown .selected');
+//   let allSelected = true;
 
-  selections.forEach(function (selection) {
-    if (selection.textContent.trim() === "") {
-      allSelected = false;
-    }
-  });
+//   selections.forEach(function (selection) {
+//     if (selection.textContent.trim() === "") {
+//       allSelected = false;
+//     }
+//   });
 
-  if (allSelected) {
-    // Do something if needed when all selections made
-  }
-}
+//   if (allSelected) {
+//     // Do something if needed when all selections made
+//   }
+// }
 
 window.addEventListener('click', function(e) {
   if (e.target.classList.contains('results')) {
@@ -116,3 +83,72 @@ window.addEventListener('click', function(e) {
     document.querySelectorAll('.dropdown-options').forEach(d => d.style.display = 'none');
   }
 });
+
+function getData() {
+  // this is a list of json objects that contain html snippets that we will display conditionally
+  // based on other attributes they have
+  // each object will have four variables: surgeryType, timeSinceSurgery, diabetesHisotry, and adviceType
+  // each object will also have a "yield" attribute containing the html snippet to be displayed
+  
+  // Options for surgeryType: "gastric sleeve", "roux-en-Y bypass"
+  // Options for timeSinceSurgery: "<3 weeks", "3-8 weeks", ">8 weeks"
+  // Options for diabetesHistory: "has diabetes", "no diabetes"
+  // Options for adviceType: "routine", "complications", "medications", "dietary"
+  return [
+    {
+      "order": 1,
+      "surgeryType": "gastric sleeve",
+      "timeSinceSurgery": "*",
+      "diabetesHistory": "*",
+      "adviceType": "routine",
+      "yield": `<strong>Routine follow-up consult:</strong><br><br>
+          <ul style=\"text-align: left; display: inline-block; line-height: 1.6;\">
+            <li><strong>Assessment:</strong><br>Hydration status, blood pressure, possible complications, tolerance of pureed diet - should slowly progress to solids at 6 weeks<br/></li>
+            <li><strong>Management:</strong><br>Review anti-hypertensives and medications with a narrow therapeutic index. Bariatric-specific multivitamin commenced plus thiamine for the first 3 weeks</li>
+            <li><strong>Request:</strong><br>Set up blood recalls<br/></li>
+          </ul>`
+    },
+    {
+      "order": 1,
+      "surgeryType": "gastric sleeve",
+      "timeSinceSurgery": "*",
+      "diabetesHistory": "*",
+      "adviceType": "complications",
+      "yield": `<strong>Watch for complications such as:</strong><br><br>
+          <ul style=\"text-align: left; display: inline-block; line-height: 1.6;\">
+            <li>Wound infections or abscesses.</li>
+            <li>Anastomotic leaks (especially in the first few weeks).</li>
+            <li>Nutritional deficiencies—fatigue, neuropathy, or anemia.</li>
+            <li>Dumping syndrome (especially in bypass patients).</li>
+          </ul>`
+    },
+    {
+      "order": 1,
+      "surgeryType": "gastric sleeve",
+      "timeSinceSurgery": "*",
+      "diabetesHistory": "*",
+      "adviceType": "medications",
+      "yield": `<strong>Medication adjustments:</strong><br><br>
+          <ul style=\"text-align: left; display: inline-block; line-height: 1.6;\">
+            <li>Review antihypertensives—some may no longer be needed.</li>
+            <li>Titrate or cease diabetic medications as needed.</li
+            <li>Avoid NSAIDs; consider gastroprotection.</li>
+            <li>Ensure continuation of vitamin/mineral supplementation.</li>
+          </ul>`
+    },
+    {
+      "order": 1,
+      "surgeryType": "gastric sleeve",
+      "timeSinceSurgery": "*",
+      "diabetesHistory": "*",
+      "adviceType": "dietary",
+      "yield": `<strong>Nutritional advice:</strong><br><br>
+          <ul style=\"text-align: left; display: inline-block; line-height: 1.6;\">
+            <li>High-protein, low-sugar meals eaten slowly in small portions.</li>
+            <li>Avoid drinking fluids with meals.</li>
+            <li>Lifelong vitamin and mineral supplementation required.</li>
+            <li>Regular follow-up with a bariatric dietitian is essential.</li>
+          </ul>`
+    }
+  ]
+}
