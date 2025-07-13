@@ -4,30 +4,31 @@
   <meta charset="UTF-8">
   <title>Bariatric follow up</title>
   <link rel="stylesheet" href="index.css">
+  <script src="data.js"></script>
   <script src="index.js"></script>
 </head>
-<body onload="showInfo()">
+<body>
   <header>Bariatric surgery guidance for GPs</header>
 
   <div class="content">
     <div class="text-block">
       <span class="inline-text">My patient had a </span>
       <div class="custom-dropdown inline-dropdown">
-        <div class="selected" onclick="toggleDropdown(this)">gastric sleeve</div>
+        <div class="selected" id="surgeryType" data-value="gastric sleeve" ="toggleDropdown(this)">gastric sleeve</div>
         <ul class="dropdown-options">
-          <li onclick="selectOption(this)">gastric sleeve</li>
-          <li onclick="selectOption(this)">roux-en-Y bypass</li>
+          <li onclick="selectOption(this, 'gastric sleeve')">gastric sleeve</li>
+          <li onclick="selectOption(this, 'roux-en-Y bypass')">roux-en-Y bypass</li>
         </ul>
       </div>
     </div>
 
     <div class="text-block">
       <div class="custom-dropdown inline-dropdown">
-        <div class="selected" onclick="toggleDropdown(this)">less than 3 weeks</div>
+        <div class="selected" id="timeSinceSurgery" data-value="<3 weeks" onclick="toggleDropdown(this)">less than 3 weeks</div>
         <ul class="dropdown-options">
-          <li onclick="selectOption(this)">less than 3 weeks</li>
-          <li onclick="selectOption(this)">3-8 weeks</li>
-          <li onclick="selectOption(this)">over 8 weeks</li>
+          <li onclick="selectOption(this, '<3 weeks')">less than 3 weeks</li>
+          <li onclick="selectOption(this, '3-8 weeks')">3-8 weeks</li>
+          <li onclick="selectOption(this, '>8 weeks')">over 8 weeks</li>
         </ul>
       </div>
       <span class="inline-text">ago overseas.</span> 
@@ -37,10 +38,10 @@
     <div class="text-block"> 
       <span class="inline-text">They</span>
       <div class="custom-dropdown inline-dropdown">
-        <div class="selected" onclick="toggleDropdown(this)">do</div>
+        <div class="selected" id="diabetesHistory" data-value='has diabetes' onclick="toggleDropdown(this)">do</div>
         <ul class="dropdown-options">
-          <li onclick="selectOption(this)">do</li>
-          <li onclick="selectOption(this)">do not</li>
+          <li onclick="selectOption(this, 'has diabetes')">do</li>
+          <li onclick="selectOption(this, 'no diabetes')">do not</li>
         </ul>
       </div>
       <span class="inline-text">have a history of diabetes.</span>
@@ -49,12 +50,12 @@
     <div class="text-block" id="final-form-line">
       <span class="inline-text">I want to know about:</span>
       <div class="custom-dropdown inline-dropdown">
-        <div class="selected" id="info-selected" onclick="toggleDropdown(this)">routine follow up</div>
+        <div class="selected" id="adviceType" data-value="routine" onclick="toggleDropdown(this)">routine follow up</div>
         <ul class="dropdown-options">
-          <li onclick="selectInfoOption(this, 'routine')">routine follow up</li>
-          <li onclick="selectInfoOption(this, 'complications')">possible complications</li>
-          <li onclick="selectInfoOption(this, 'medications')">medication adjustments</li>
-          <li onclick="selectInfoOption(this, 'nutrition')">nutritional advice</li>
+          <li onclick="selectOption(this, 'routine', true)">routine follow up</li>
+          <li onclick="selectOption(this, 'complications', true)">possible complications</li>
+          <li onclick="selectOption(this, 'medications', true)">medication adjustments</li>
+          <li onclick="selectOption(this, 'dietary', true)">dietary advice</li>
         </ul>
       </div>
       <span class="inline-text"></span>
