@@ -14,16 +14,15 @@ const bariatricAdviceData = [
     "timeSinceSurgery": "*",
     "diabetesHistory": "*",
     "adviceType": "routine",
-    "yield": `<strong>Routine follow-up consult:</strong><br><br>
+    "yield": `<strong>Routine follow-up:</strong><br><br>
           <ul style="text-align: left; display: inline-block; line-height: 1.6;">
             <li>Update classificiation on PMS</li>
             <li>Arrange recalls for blood tests</li>
-            <li>Ensure on bariatric specific multi-vitamin and has dietary information</li>
+            <li>Ensure taking bariatric specific multi-vitamin and has dietary information</li>
             <li>Brief screen for complications</li>
             <li>Encourage smoking cessation and alcohol avoidance</li>
             <li>Council re: pregnancy planning if appropriate - aim to avoid 12-18 months post surgery</li>
             <li>Connect with health coach or green prescription for ongoing physical activity and mental health support</li>
-            <li><strong>Request:</strong><br>Set up blood recalls<br/></li>
           </ul>`
   },
   {
@@ -32,12 +31,12 @@ const bariatricAdviceData = [
     "timeSinceSurgery": "*",
     "diabetesHistory": "*",
     "adviceType": "complications",
-    "yield": `<strong>Watch for complications such as:</strong><br><br>
+    "yield": `<strong>Possible complications at 3 weeks:</strong><br><br>
           <ul style="text-align: left; display: inline-block; line-height: 1.6;">
-            <li>Wound infections or abscesses.</li>
-            <li>Anastomotic leaks (especially in the first few weeks).</li>
-            <li>Nutritional deficiencies—fatigue, neuropathy, or anemia.</li>
-            <li>Dumping syndrome (especially in bypass patients).</li>
+            <li><strong>Any fever or unexplained tachycardia even in the absence of abdominal pain needs urgent investigation</strong></li>
+            <li>Assess for dehydration. If intractable vomiting or severe dehydration: at risk of thiamine defiency needs referral to hospital</li>
+            <li>Hair loss and constipation common, increase protein in diet and treat constipation with stool softeners</li>
+            <li>Staple line leak may present as pleuritic pain or SOB, low index of suspicion even in the absence of abdominal pain</li>
           </ul>`
   },
   {
