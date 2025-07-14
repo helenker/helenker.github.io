@@ -16,8 +16,13 @@ const bariatricAdviceData = [
     "adviceType": "routine",
     "yield": `<strong>Routine follow-up consult:</strong><br><br>
           <ul style="text-align: left; display: inline-block; line-height: 1.6;">
-            <li><strong>Assessment:</strong><br>Hydration status, blood pressure, possible complications, tolerance of pureed diet - should slowly progress to solids at 6 weeks<br/></li>
-            <li><strong>Management:</strong><br>Review anti-hypertensives and medications with a narrow therapeutic index. Bariatric-specific multivitamin commenced plus thiamine for the first 3 weeks</li>
+            <li>Update classificiation on PMS</li>
+            <li>Arrange recalls for blood tests</li>
+            <li>Ensure on bariatric specific multi-vitamin and has dietary information</li>
+            <li>Brief screen for complications</li>
+            <li>Encourage smoking cessation and alcohol avoidance</li>
+            <li>Council re: pregnancy planning if appropriate - aim to avoid 12-18 months post surgery</li>
+            <li>Connect with health coach or green prescription for ongoing physical activity and mental health support</li>
             <li><strong>Request:</strong><br>Set up blood recalls<br/></li>
           </ul>`
   },
