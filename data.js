@@ -18,7 +18,7 @@ const bariatricAdviceData = [
           <ul style="text-align: left; display: inline-block; line-height: 1.6;">
             <li>Update classificiation on PMS</li>
             <li>Arrange recalls for blood tests</li>
-            <li>Ensure taking bariatric specific multi-vitamin and has dietary information</li>
+            <li>Ensure taking a <a href=https://www.healthinfo.org.nz/patientinfo/nutrition-supplements-after-bariatric-surgery.pdf> bariatric specific multi-vitamin</a> (funded MVITE not sufficient) and has dietary information</li>
             <li>Brief screen for complications</li>
             <li>Encourage smoking cessation and alcohol avoidance</li>
             <li>Council re: pregnancy planning if appropriate - aim to avoid 12-18 months post surgery</li>
@@ -51,7 +51,7 @@ const bariatricAdviceData = [
             <li>Assess for dehydration. If intractable vomiting or severe dehydration: at risk of thiamine defiency needs referral to hospital</li>
             <li>Hair loss and constipation common, increase protein in diet and treat constipation with stool softeners</li>
             <li>Staple line leak may present as pleuritic pain or SOB, low index of suspicion even in the absence of abdominal pain</li>
-            <li> Dumping syndrome</li>
+            <li>Dumping syndrome - dizziness, flushing, headaches after eating due to concentrated carbs being dumped from stomach, reduce meal size and carb load</li>
           </ul>`
   },
    {
@@ -80,26 +80,83 @@ const bariatricAdviceData = [
     "adviceType": "medications",
     "yield": `<strong>Medication adjustments:</strong><br><br>
           <ul style="text-align: left; display: inline-block; line-height: 1.6;">
-            <li>All insulin and sulfonylureas should have been stopped pre-operatively</li>
-            <li>Review antihypertensives—some may no longer be needed.</li>
+            <li>All insulin, sulfonylureas and SGLT-2 inhibitors should have been stopped pre-operatively</li>
+            <li>Consider stopping metformin once diabetes in remission</li>
+            <li>Could consider restarting empagliflozin if needed for heart failure once carbohydrate intake sufficient</li> 
+            <li>Continue statins</li>
+            <li>Review antihypertensives at each follow up—lower doses may be needed.</li>
             <li>Titrate all medications with a narrow therapeutic index e.g warfarin, sodium valproate</li>
             <li>Avoid NSAIDs</li>
-            <li>If reflux history consider PPIs, sleeve can exacerbate underlying reflux</li>
-            <li>Ensure tolerating bariatric-specific multi-vitamin</li>
+            <li>If reflux history consider starting a PPI, sleeve can exacerbate underlying reflux</li>
+            <li>Ensure tolerating <a href=https://www.healthinfo.org.nz/patientinfo/nutrition-supplements-after-bariatric-surgery.pdf>bariatric-specific multi-vitamin</a> (funded MVITE not sufficient)</li>
+          </ul>`
+  },
+    {
+    "order": 1,
+    "surgeryType": "gastric sleeve",
+    "timeSinceSurgery": "*",
+    "diabetesHistory": "no diabetes",
+    "adviceType": "medications",
+    "yield": `<strong>Medication adjustments:</strong><br><br>
+          <ul style="text-align: left; display: inline-block; line-height: 1.6;">
+            <li>Review antihypertensives — some may no longer be needed. Continue statins if on a statin pre-operatively.</li>
+            <li>Titrate all medications with a narrow therapeutic index e.g warfarin, sodium valproate</li>
+            <li> Stop empagliflozin pre and post op and consider reintroducing if needed for HF once carbohydrate intake sufficient</li> 
+            <li>Avoid NSAIDs</li>
+            <li>If reflux history consider starting a PPI, sleeve can exacerbate underlying reflux</li>
+            <li>Ensure tolerating <a href=https://www.healthinfo.org.nz/patientinfo/nutrition-supplements-after-bariatric-surgery.pdf> bariatric-specific multi-vitamin</a> (funded MVITE not sufficient)</li>
           </ul>`
   },
   {
     "order": 1,
     "surgeryType": "gastric sleeve",
-    "timeSinceSurgery": "*",
+    "timeSinceSurgery": "<3 weeks",
     "diabetesHistory": "*",
     "adviceType": "dietary",
-    "yield": `<strong>Nutritional advice:</strong><br><br>
+    "yield": `<strong>Dietary and Nutritional advice:</strong><br><br>
           <ul style="text-align: left; display: inline-block; line-height: 1.6;">
-            <li>High-protein, low-sugar meals eaten slowly in small portions.</li>
-            <li>Avoid drinking fluids with meals.</li>
-            <li>Lifelong vitamin and mineral supplementation required.</li>
-            <li>Regular follow-up with a bariatric dietitian is essential.</li>
+            <li> Offer referral to a private bariatric dietician -follow up with a dietician will vary depending on the package deal and surgeon</li>
+            <li>General principles - slow progression from liquid diet to soft diet over 8 weeks, maintaining hydration and ensuring adequate nutrients and protein intake</li>
+            <li>AVOID drinking liquids with meals and chew thoroughly before swallowing.</li>
+            <li>Drink between 6-8 glasses of water a day </li>
+            <li>Provide an <a href=https://www.health.qld.gov.au/__data/assets/pdf_file/0025/1039912/bari-surg-overview.pdf> information sheet</a> with a dietary overview</li>
+            <li> If needed offer specific dietary advice for <a href=https://www.health.qld.gov.au/__data/assets/pdf_file/0030/1039908/bari-surg-s1.pdf>stage 1 (liquid diet)</a> or a <a href=https://www.health.qld.gov.au/__data/assets/pdf_file/0031/1039909/bari-surg-s2-puree.pdf >stage 2 (pureed diet)</a>
+            <li>Ensure tolerating <a href=https://www.healthinfo.org.nz/patientinfo/nutrition-supplements-after-bariatric-surgery.pdf> bariatric-specific multi-vitamin</a> (funded MVITE not sufficient)</li>          
+          </ul>`
+  },
+    {
+    "order": 1,
+    "surgeryType": "gastric sleeve",
+    "timeSinceSurgery": "3-8 weeks",
+    "diabetesHistory": "*",
+    "adviceType": "dietary",
+    "yield": `<strong>Dietary and Nutritional advice:</strong><br><br>
+          <ul style="text-align: left; display: inline-block; line-height: 1.6;">
+            <li> Offer referral to a private bariatric dietician -follow up with a dietician will vary depending on the package deal and surgeon</li>
+            <li>General principles - slow progression from liquid diet to soft diet over 8 weeks, maintaining hydration and ensuring adequate nutrients and protein</li>
+            <li> Patient's follow up with a dietician will vary depending on the package deal and surgeon</li>
+            <li>AVOID drinking liquids with meals and chew thoroughly before swallowing.</li>
+            <li>Drink between 6-8 glasses of water a day </li>
+            <li>Provide an <a href=https://www.health.qld.gov.au/__data/assets/pdf_file/0025/1039912/bari-surg-overview.pdf> information sheet</a> with a dietary overview</li>
+            <li> If needed offer specific dietary advice for <a href=https://www.health.qld.gov.au/__data/assets/pdf_file/0031/1039909/bari-surg-s2-puree.pdf >stage 2 (pureed diet)</a> or <a href=https://www.health.qld.gov.au/__data/assets/pdf_file/0023/1039910/bari-surg-s3.pdf > stage 3 (soft diet)</a>
+            <li>Ensure tolerating <a href=https://www.healthinfo.org.nz/patientinfo/nutrition-supplements-after-bariatric-surgery.pdf> bariatric-specific multi-vitamin</a> (funded MVITE not sufficient)</li>
+          </ul>`
+  },
+    {
+    "order": 1,
+    "surgeryType": "gastric sleeve",
+    "timeSinceSurgery": ">8 weeks",
+    "diabetesHistory": "*",
+    "adviceType": "dietary",
+    "yield": `<strong>Dietary and Nutritional advice:</strong><br><br>
+          <ul style="text-align: left; display: inline-block; line-height: 1.6;">
+            <li> Offer referral to a private bariatric dietician-follow up with a dietician will vary depending on the package deal and surgeon</li>
+            <li>Should now be able to tolerate a diet of <a href=https://www.health.qld.gov.au/__data/assets/pdf_file/0024/1039911/bari-surg-s4-solids.pdf >solid food</a>
+            <li>General principles - maintaining adequate hydration and ensuring adequate nutrients and protein intake</li>
+            <li>Patient's follow up with a dietician will vary depending on the package deal and surgeon</li>
+            <li>AVOID drinking liquids with meals and chew thoroughly before swallowing.</li>
+            <li>Drink between 6-8 glasses of water a day </li>
+            <li>Ensure tolerating <a href=https://www.healthinfo.org.nz/patientinfo/nutrition-supplements-after-bariatric-surgery.pdf> bariatric-specific multi-vitamin</a> (funded MVITE not sufficient)</li>
           </ul>`
   }
 ];
