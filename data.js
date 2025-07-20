@@ -28,10 +28,10 @@ const bariatricAdviceData = [
   {
     "order": 1,
     "surgeryType": "gastric sleeve",
-    "timeSinceSurgery": "*",
+    "timeSinceSurgery": "<3 weeks",
     "diabetesHistory": "*",
     "adviceType": "complications",
-    "yield": `<strong>Possible complications at 3 weeks:</strong><br><br>
+    "yield": `<strong>Possible complications:</strong><br><br>
           <ul style="text-align: left; display: inline-block; line-height: 1.6;">
             <li><strong>Any fever or unexplained tachycardia even in the absence of abdominal pain needs urgent investigation</strong></li>
             <li>Assess for dehydration. If intractable vomiting or severe dehydration: at risk of thiamine defiency needs referral to hospital</li>
@@ -39,18 +39,53 @@ const bariatricAdviceData = [
             <li>Staple line leak may present as pleuritic pain or SOB, low index of suspicion even in the absence of abdominal pain</li>
           </ul>`
   },
+   {
+    "order": 1,
+    "surgeryType": "gastric sleeve",
+    "timeSinceSurgery": "3-8 weeks",
+    "diabetesHistory": "*",
+    "adviceType": "complications",
+    "yield": `<strong>Possible complications:</strong><br><br>
+          <ul style="text-align: left; display: inline-block; line-height: 1.6;">
+            <li><strong>Any fever or unexplained tachycardia even in the absence of abdominal pain needs urgent investigation</strong></li>
+            <li>Assess for dehydration. If intractable vomiting or severe dehydration: at risk of thiamine defiency needs referral to hospital</li>
+            <li>Hair loss and constipation common, increase protein in diet and treat constipation with stool softeners</li>
+            <li>Staple line leak may present as pleuritic pain or SOB, low index of suspicion even in the absence of abdominal pain</li>
+            <li> Dumping syndrome</li>
+          </ul>`
+  },
+   {
+    "order": 1,
+    "surgeryType": "gastric sleeve",
+    "timeSinceSurgery": ">8 weeks",
+    "diabetesHistory": "*",
+    "adviceType": "complications",
+    "yield": `<strong>Possible complications:</strong><br><br>
+          <ul style="text-align: left; display: inline-block; line-height: 1.6;">
+            <li>Assess for dehydration. If intractable vomiting or severe dehydration: at risk of thiamine defiency needs referral to hospital</li>
+            <li>Hair loss and constipation common, increase protein in diet and treat constipation with stool softeners</li>
+            <li>Dumping syndrome - dizziness, flushing, headaches after eating due to concentrated carbs being dumped from stomach, reduce meal size and carb load</li>
+            <li>Nutritional deficiency - may present as anaemia, neurological symptoms, taste disturbance, poor wound healing. hair loss - check blood tests</li>
+            <li>Stricture</li>
+            <li>Weight regain</li>
+            <li>Reflux - treat with OTC meds or PPI and if no improvement refer to bariatric surgeon</li>
+            <li>Excessive skin - often need plastic surgery referral 12 months after surgery</li>
+          </ul>`
+  },
   {
     "order": 1,
     "surgeryType": "gastric sleeve",
     "timeSinceSurgery": "*",
-    "diabetesHistory": "*",
+    "diabetesHistory": "has diabetes",
     "adviceType": "medications",
     "yield": `<strong>Medication adjustments:</strong><br><br>
           <ul style="text-align: left; display: inline-block; line-height: 1.6;">
+            <li>All insulin and sulfonylureas should have been stopped pre-operatively</li>
             <li>Review antihypertensives—some may no longer be needed.</li>
-            <li>Titrate or cease diabetic medications as needed.</li>
-            <li>Avoid NSAIDs; consider gastroprotection.</li>
-            <li>Ensure continuation of vitamin/mineral supplementation.</li>
+            <li>Titrate all medications with a narrow therapeutic index e.g warfarin, sodium valproate</li>
+            <li>Avoid NSAIDs</li>
+            <li>If reflux history consider PPIs, sleeve can exacerbate underlying reflux</li>
+            <li>Ensure tolerating bariatric-specific multi-vitamin</li>
           </ul>`
   },
   {
